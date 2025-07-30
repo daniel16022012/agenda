@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Agenda Manicure 💅</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom, #ffd6e7, #ffe6f0);
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      max-width: 450px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      margin-bottom: 40px;
+    }
+    h1 {
+      color: #cc0066;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      text-align: left;
+      margin-top: 10px;
+      color: #333;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      margin-top: 20px;
+      background-color: #cc0066;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #a10052;
+    }
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+    #precoDuracaoInfo {
+      margin-top: 10px;
+      font-weight: 600;
+      color: #6a1b9a;
+      min-height: 24px;
+    }
+    /* Acesso manicure */
+    #acessoManicureBtn {
+      background-color: #6a1b9a;
+      margin-top: 30px;
+      padding: 12px;
+      font-weight: bold;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      color: white;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    #acessoManicureBtn:hover {
+      background-color: #4a0072;
+    }
+    #senhaSecretaBox {
+      margin-top: 15px;
+      display: none;
+      text-align: left;
+    }
+    #senhaSecretaBox input {
+      width: calc(100% - 100px);
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+    #senhaSecretaBox button {
+      width: 80px;
+      padding: 10px;
+      margin-left: 10px;
+      background-color: #6a1b9a;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      vertical-align: middle;
+      transition: background-color 0.3s;
+    }
+    #senhaSecretaBox button:hover {
+      background-color: #4a0072;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💅 Agende seu horário</h1>
+    <form id="agendaForm">
+      <label for="nome">👩 Seu nome:</label>
+      <input type="text" id="nome" required />
+
+      <label for="data">📅 Data:</label>
+      <input type="date" id="data" required />
+
+      <label for="hora">⏰ Hora:</label>
+      <input type="time" id="hora" required />
+
+      <label for="servico">💖 Serviço:</label>
+      <select id="servico" required>
+        <option value="">Selecione</option>
+        <option value="unhaFibra" data-preco="150" data-duracao="3h">Unha de fibra - R$150 (3h)</option>
+        <option value="manutencaoFibra" data-preco="90" data-duracao="2h30">Manutenção de fibra - R$90 (2h30)</option>
+        <option value="mao" data-preco="30" data-duracao="45min">Mão - R$30 (45min)</option>
+        <option value="pe" data-preco="35" data-duracao="1h">Pé - R$35 (1h)</option>
+        <option value="peMao" data-preco="60" data-duracao="1h30">Pé e mão - R$60 (1h30)</option>
+        <option value="banhoGel" data-preco="90" data-duracao="2h">Banho de gel - R$90 (2h)</option>
+        <option value="esmalatacaoGel" data-preco="60" data-duracao="1h30">Esmaltação em gel - R$60 (1h30)</option>
+        <option value="peMaoEsmaltacaoGel" data-preco="80" data-duracao="2h">Pé + mão com esmaltação em gel - R$80 (2h)</option>
+      </select>
+
+      <div id="precoDuracaoInfo"></div>
+
+      <label for="formaPagamento">💳 Forma de pagamento:</label>
+      <select id="formaPagamento" required>
+        <option value="">Selecione</option>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de Crédito">Cartão de Crédito</option>
+        <option value="Cartão de Débito">Cartão de Débito</option>
+        <option value="Pix">Pix</option>
+        <option value="Transferência">Transferência</option>
+      </select>
+
+      <button type="submit">✅ Confirmar Agendamento</button>
+    </form>
+
+    <button id="acessoManicureBtn" onclick="mostrarSenhaSecreta()">🔐 Acesso da Manicure</button>
+
+    <div id="senhaSecretaBox">
+      <input
+        type="password"
+        id="senhaSecretaInput"
+        placeholder="Digite a senha"
+        autocomplete="off"
+      />
+      <button onclick="acessarAreaAdm()">Entrar</button>
+    </div>
+
+    <div class="footer">Agenda da Beleza ✨</div>
+  </div>
+
+  <script>
+    const servicoSelect = document.getElementById("servico");
+    const precoDuracaoInfo = document.getElementById("precoDuracaoInfo");
+
+    servicoSelect.addEventListener("change", () => {
+      const selectedOption = servicoSelect.options[servicoSelect.selectedIndex];
+      if (selectedOption.value) {
+        const preco = selectedOption.getAttribute("data-preco");
+        const duracao = selectedOption.getAttribute("data-duracao");
+        precoDuracaoInfo.textContent = `💰 Preço: R$${preco} | ⏳ Duração: ${duracao}`;
+      } else {
+        precoDuracaoInfo.textContent = "";
+      }
+    });
+
+    function duracaoEmMinutos(duracaoStr) {
+      let h = 0, m = 0;
+      const hMatch = duracaoStr.match(/(\d+)h/);
+      const mMatch = duracaoStr.match(/(\d+)min/);
+      if (hMatch) h = parseInt(hMatch[1], 10);
+      if (mMatch) m = parseInt(mMatch[1], 10);
+      return h * 60 + m;
+    }
+
+    function horaParaMinutos(horaStr) {
+      const [h, m] = horaStr.split(":").map(Number);
+      return h * 60 + m;
+    }
+
+    function temConflito(novoData, novoHora, novaDuracaoMin) {
+      const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+      const inicioNovo = horaParaMinutos(novoHora);
+      const fimNovo = inicioNovo + novaDuracaoMin;
+
+      const inicioAlmoco = 12 * 60;
+      const fimAlmoco = 12 * 60 + 59;
+      if (!(fimNovo <= inicioAlmoco || inicioNovo >= fimAlmoco)) {
+        return true; // conflito com horário de almoço
+      }
+
+      const agendamentosDia = agendamentos.filter(a => a.data === novoData);
+
+      for (const ag of agendamentosDia) {
+        const inicioExistente = horaParaMinutos(ag.hora);
+        const duracaoExistente = duracaoEmMinutos(ag.duracao);
+        const fimExistente = inicioExistente + duracaoExistente;
+
+        if (!(fimNovo <= inicioExistente || inicioNovo >= fimExistente)) {
+          return true; // conflito encontrado
+        }
+      }
+      return false;
+    }
+
+    function salvarAgendamento(agendamento) {
+      const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+      agendamentos.push(agendamento);
+      localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+    }
+
+    document.getElementById("agendaForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const data = document.getElementById("data").value;
+      const hora = document.getElementById("hora").value;
+      const selectedOption = servicoSelect.options[servicoSelect.selectedIndex];
+      const servico = selectedOption.text;
+      const preco = selectedOption.getAttribute("data-preco");
+      const duracao = selectedOption.getAttribute("data-duracao");
+      const formaPagamento = document.getElementById("formaPagamento").value;
+
+      if (!nome || !data || !hora || !formaPagamento) {
+        alert("Por favor, preencha todos os campos, incluindo a forma de pagamento.");
+        return;
+      }
+
+      const diaSemana = new Date(data).getDay();
+
+      if (diaSemana === 0 || diaSemana === 1 || diaSemana === 6) {
+        alert("🚫 Não é permitido agendar para sábados, domingos e segundas-feiras.");
+        return;
+      }
+
+      const duracaoMin = duracaoEmMinutos(duracao);
+      const inicioMin = horaParaMinutos(hora);
+      const fimMin = inicioMin + duracaoMin;
+
+      if (fimMin > 17 * 60 + 30) {
+        alert("❌ Agendamento não pode ultrapassar 17:30.");
+        return;
+      }
+
+      const hoje = new Date();
+      const dataEscolhida = new Date(data);
+
+      const ultimoDiaDoMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 0);
+      const dataLiberarMesSeguinte = new Date(ultimoDiaDoMes);
+      dataLiberarMesSeguinte.setDate(ultimoDiaDoMes.getDate() - 7);
+
+      if (
+        (dataEscolhida.getMonth() > hoje.getMonth() || dataEscolhida.getFullYear() > hoje.getFullYear()) &&
+        hoje < dataLiberarMesSeguinte
+      ) {
+        alert(
+          `❌ Ainda não pode agendar para o próximo mês. Você poderá agendar para ${dataEscolhida.toLocaleString('pt-BR', { month: 'long' })} a partir de ${dataLiberarMesSeguinte.getDate()}/${dataLiberarMesSeguinte.getMonth() + 1}.`
+        );
+        return;
+      }
+
+      if (temConflito(data, hora, duracaoMin)) {
+        alert("⛔ Horário indisponível para o serviço escolhido. Por favor, escolha outro horário.");
+        return;
+      }
+
+      const agendamento = { nome, data, hora, servico, preco, duracao, formaPagamento, feito: false };
+      salvarAgendamento(agendamento);
+
+      alert(
+        `✅ Agendamento confirmado!\n\nCliente: ${nome}\nData: ${data}\nHora: ${hora}\nServiço: ${servico}\nPreço: R$${preco}\nDuração: ${duracao}\nForma de pagamento: ${formaPagamento}`
+      );
+
+      this.reset();
+      precoDuracaoInfo.textContent = "";
+    });
+
+    function mostrarSenhaSecreta() {
+      const box = document.getElementById("senhaSecretaBox");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    function acessarAreaAdm() {
+      const senha = document.getElementById("senhaSecretaInput").value;
+      if (senha === "010185") {
+        window.location.href = "admin.html";
+      } else {
+        alert("❌ Senha incorreta!");
+      }
+    }
+  </script>
+</body>
+</html>
