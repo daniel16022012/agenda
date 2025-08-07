@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Página Inicial</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffe0ec, #fff6f9);
+    }
+
+    header {
+      background-color: #cc0066;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .titulo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h2 {
+      color: #cc0066;
+      margin-top: 30px;
+    }
+
+    p, li {
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    img.foto {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border-radius: 15px;
+    }
+
+    ul {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .botao-agendar {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 20px;
+      background-color: #cc0066;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .botao-agendar:hover {
+      background-color: #a10052;
+    }
+
+    .secao {
+      display: none;
+    }
+
+    .secao.ativa {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="titulo">Bem-vinda à minha agenda</div>
+    <nav>
+      <a onclick="mostrarSecao('sobre')">Sobre Mim</a>
+      <a onclick="mostrarSecao('contato')">Contato</a>
+      <a onclick="mostrarSecao('servicos')">Serviços</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <img src="foto.jpg" alt="Foto da manicure" class="foto" />
+
+    <section id="sobre" class="secao ativa">
+      <h2>Sobre Mim</h2>
+      <p>Olá! Me chamo Carla Neris. Atuo na área da beleza com muito amor e dedicação. Sou manicure especializada em unhas de fibra, esmaltação em gel, banho de gel e muitos outros serviços. Meu objetivo é deixar suas unhas lindas e bem cuidadas!</p>
+      <a class="botao-agendar" href="agendaclientes.html">Agende seu horário</a>
+    </section>
+
+    <section id="contato" class="secao">
+      <h2>Contato</h2>
+      <p>WhatsApp: <a href="https://wa.me/5511910392831" target="_blank">Clique aqui para falar comigo</a></p>
+      <p>Instagram: <a href="https://instagram.com/carladaniel23" target="_blank">@carladaniel23</a></p>
+    </section>
+
+    <section id="servicos" class="secao">
+      <h2>Serviços</h2>
+      <ul>
+        <li>Unha de fibra </li>
+        <li>Manutenção de fibra </li>
+        <li>Mão </li>
+        <li>Pé </li>
+        <li>Pé e mão </li>
+        <li>Banho de gel </li>
+        <li>Esmaltação em gel </li>
+        <li>Pé + mão com esmaltação em gel </li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    function mostrarSecao(id) {
+      const secoes = document.querySelectorAll('.secao');
+      secoes.forEach(secao => {
+        secao.classList.remove('ativa');
+      });
+      document.getElementById(id).classList.add('ativa');
+    }
+  </script>
+
+</body>
+</html>
